@@ -1,0 +1,204 @@
+use("sample_training")
+
+db.zips.find({ state: "NY" })
+
+
+
+
+/*cosme@Lenovo-IdeaPad-S145-14API-8d85cc28:~/Documentos/Mongodb$ 
+rm -rf .git      "Eso es para borrar todo lo que tenga inicializado y hacer desde cero"
+
+Crear el token con estas opciones
+Selecciona los permisos que necesitas.
+Para un repositorio, probablemente necesitarás el permiso repo 
+(puedes expandir "repo" y seleccionar repo y write:packages 
+para tener acceso completo a los repositorios y a la capacidad de escribir en ellos).
+MI token "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"
+
+
+git init
+git add .
+git commit -m "Espoch"
+git status
+git remote add origin https://github.com/Cosme57/Mongosh.git
+git branch -M main
+git push -u origin main
+Username for 'https://github.com': Cosme57     "Name de usuario Hithub"
+Password for 'https://Cosme57@github.com':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  "Direccion del Token"
+
+
+git push origin main
+
+CREDENCIALES:
+
+/*github.com
+Nombre de usuario
+cosmeguerrero218@gmail.com
+Contraseña
+vaca123456789@
+
+MONGODB COMpASS
+Correo: cosmeguerrero218@gmail.com
+Contra: 123456789Cos
+
+
+CISCO
+Correo: cosmeguerrero218@gmail.com
+Contra: 123456789Cos@
+
+
+
+
+UNA BD CUALQUIER NAME "COSME" coleccion "cantones" 2 codumentos 1 orellana y otro LORETO 2 campos cada documentos
+puerto de enlace 2893 puerto de acceso al compass
+
+
+nano docker-compose.yml
+docker-compose up -d --build
+
+
+Abrir el compass para estra parctica
+
+Esto es de la Ip con una nueva BD
+Para entrar al MOngosh entro a mi terminal de Ubuntu y pego esto.
+mongodb://root:root123@192.168.137.11:27933/?tls=false&authMechanism=DEFAULT
+
+mongosh 'mongodb://root:root123@192.168.0.107:27017/?tls=false&authMechanism=DEFAULT'
+
+use("Cosme")
+db.osote.find()
+
+
+Esto es con las BD Samples que teniamos
+PARA ENTRAR DESDE LA WEB SE HACE ASI
+EN EL TERMINAL DE UBUNTU COLOCO ESTO
+mongosh "mongodb+srv://poli.tfluj2j.mongodb.net/" --apiVersion 1 --username cosmeguerrero
+METO MI CONTRA QUE ES 123456789Cos
+luego esto
+use("sample_training")
+db.zips.find({ state: "NY" })
+
+
+
+--------------------------
+mkdir BD
+cd BD
+mkdir proxy mongodb
+cd proxy
+docker network create proxy
+nano docker-compose.yml
+--------------------------
+
+version: '3'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+      - 1433:1433
+      - 27017:27017
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf
+networks:
+  default:
+    external:
+      name: proxy
+
+--------------------------
+Guardamos y actualizamos
+docker-compose up -d --build
+--------------------------
+
+----------------------------------------------------
+salimos del directorio proxy y entramos al de mongodb
+cd mongodb
+nano docker-compose.yml
+--------------------------
+                    
+version: '3.9'
+services:
+  mongodb:
+    image: mongo:5.0
+    container_name: mongo
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root123
+    volumes:
+      - ./mongo_data:/data/db
+    networks:
+      - backend
+networks:
+  backend:
+    external:
+      name: proxy
+
+--------------------------
+Guardamos y actualizamos
+docker-compose up -d --build
+--------------------------
+
+
+
+COdigo combinado del proxy y mongodb
+
+
+version: '3'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./my_custom_BD_settings.conf:/etc/nginx/conf.d/my_custom_BD_settings.conf
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root123
+    volumes:
+      - ./DB:/data/db   # Almacena datos de MongoDB en el directorio llamado DB
+
+networks:
+  default:
+    external:
+      name: proxy
+
+
+--------------------------
+Guardamos y actualizamos
+docker-compose up -d --build
+--------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
